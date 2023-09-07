@@ -1,0 +1,26 @@
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+        Stack<Integer> st=new Stack<>();
+        int len=temperatures.length;
+        int[] ans=new int [len];
+          
+          //o(n)-tc
+        for(int i=len-1;i>=0;i--){
+            
+            //popping all the idx from stack with lower or eqaul temper than curr temper
+            while(!st.isEmpty() && temperatures[i]>=temperatures[st.peek()]){
+                st.pop();
+            }
+            //after popping top of stack we get greatter
+            //so diff is the day
+            //if stack empty day=0
+            if(!st.isEmpty()){
+                ans[i]=st.peek()-i;
+            }
+
+            st.push(i);
+        }
+
+        return ans;
+    }
+}
